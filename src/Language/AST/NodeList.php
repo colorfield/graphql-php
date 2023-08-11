@@ -37,6 +37,7 @@ class NodeList implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param mixed $offset
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->nodes[$offset]);
@@ -46,6 +47,7 @@ class NodeList implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param mixed $offset
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $item = $this->nodes[$offset];
@@ -61,7 +63,7 @@ class NodeList implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_array($value) && isset($value['kind'])) {
             $value = AST::fromArray($value);
@@ -72,7 +74,7 @@ class NodeList implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->nodes[$offset]);
     }
@@ -103,6 +105,7 @@ class NodeList implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @return \Generator
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         $count = count($this->nodes);
@@ -114,6 +117,7 @@ class NodeList implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->nodes);
